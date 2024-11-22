@@ -4,6 +4,7 @@ import {
   deleteUser,
   getUser,
   getUsers,
+  getUserbyNP,
 } from "../controllers/user.js";
 import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
 
@@ -33,4 +34,5 @@ router.get("/:id", verifyUser, getUser);
 //GET ALL
 router.get("/", verifyAdmin, getUsers);
 
+router.get("/getuser", getUserbyNP);
 export default router;

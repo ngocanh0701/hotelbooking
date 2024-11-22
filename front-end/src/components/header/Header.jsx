@@ -16,7 +16,8 @@ import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
 
 import { useNavigate } from "react-router-dom";
-import { SearchContext } from "../../context/SearchContext";
+// import { SearchContext } from "../../context/SearchContext";
+import {SearchContext} from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 
 const Header = ({ type }) => {

@@ -7,10 +7,12 @@ import { useContext, useState } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useRoomContext } from "../../context/RoomContext";
 
 const Reserve = ({ setOpen, hotelId }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
   const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`);
+  const { selectedRoomsInfo, addSelectedRoom, removeSelectedRoom } = useRoomContext();
   const { dates } = useContext(SearchContext);
 
   const getDatesInRange = (startDate, endDate) => {
@@ -39,14 +41,19 @@ const Reserve = ({ setOpen, hotelId }) => {
     return !isFound;
   };
 
-  const handleSelect = (e) => {
+  const handleSelect = (e, roomInfo) => {
     const checked = e.target.checked;
     const value = e.target.value;
-    setSelectedRooms(
+    setSelectedRooms((prevRooms)=>
       checked
         ? [...selectedRooms, value]
-        : selectedRooms.filter((item) => item !== value)
+        : selectedRooms.filter((item) => item._id !== value)
     );
+    if (checked) {
+      addSelectedRoom(roomInfo);  // Thêm thông tin phòng vào context
+    } else {
+      removeSelectedRoom(roomInfo._id); // Loại bỏ phòng khỏi context
+    }
   };
 
   const navigate = useNavigate();
@@ -62,7 +69,7 @@ const Reserve = ({ setOpen, hotelId }) => {
         })
       );
       setOpen(false);
-      navigate("/");
+      navigate(`/hotels/${hotelId}/reserve`);
     } catch (err) {}
   };
   return (
@@ -86,12 +93,20 @@ const Reserve = ({ setOpen, hotelId }) => {
             </div>
             <div className="rSelectRooms">
               {item.roomNumbers.map((roomNumber) => (
-                <div className="room">
+                <div className="room" key={roomNumber._id}>
                   <label>{roomNumber.number}</label>
                   <input
                     type="checkbox"
                     value={roomNumber._id}
-                    onChange={handleSelect}
+                    onChange={(e) =>
+                      handleSelect(e, {
+                        _id: roomNumber._id,
+                        title: item.title,
+                        price: item.price,
+                        maxPeople: item.maxPeople,
+                        roomNu: roomNumber.number,
+                      })
+                    }
                     disabled={!isAvailable(roomNumber)}
                   />
                 </div>
@@ -99,6 +114,9 @@ const Reserve = ({ setOpen, hotelId }) => {
             </div>
           </div>
         ))}
+        {/* <div className="totalPrice">
+          <span>Total Price: ${selectedRoomsInfo.reduce((total, room) => total + room.price, 0)}</span>
+        </div> */}
         <button onClick={handleClick} className="rButton">
           Reserve Now!
         </button>

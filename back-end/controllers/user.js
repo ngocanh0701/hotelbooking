@@ -28,6 +28,19 @@ export const getUser = async (req,res,next)=>{
     next(err);
   }
 }
+export const getUserbyNP = async (req,res,next)=>{
+  try {
+    const { username, password } = req.query;
+    const user = await User.findOne({ username, password });
+    if (!user) {
+      return res.status(404).json({ message: "User not found or incorrect credentials" });
+    }
+
+    res.status(200).json(user);
+  } catch (err) {
+    next(err);
+  }
+}
 export const getUsers = async (req,res,next)=>{
   try {
     const users = await User.find();

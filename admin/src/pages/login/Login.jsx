@@ -2,8 +2,9 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-// import { AuthContext } from "../../context/AuthContext";
-import "./login.scss";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'; // Import icon
+import "../login/login.css";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -13,7 +14,7 @@ const Login = () => {
 
   const { loading, error, dispatch } = useContext(AuthContext);
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -26,43 +27,46 @@ const Login = () => {
       const res = await axios.post("/auth/login", credentials);
       if (res.data.isAdmin) {
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-
         navigate("/");
-      } else {
+      }else{
         dispatch({
           type: "LOGIN_FAILURE",
-          payload: { message: "You are not allowed!" },
+          payload: {message: "you are not allowed"}
         });
       }
-    } catch (err) {
+    }
+      catch (err) {
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
   };
 
+
   return (
-    <div className="login">
-      <div className="lContainer">
-        <input
-          type="text"
-          placeholder="username"
-          id="username"
-          onChange={handleChange}
-          className="lInput"
-        />
-        <input
-          type="password"
-          placeholder="password"
-          id="password"
-          onChange={handleChange}
-          className="lInput"
-        />
-        <button disabled={loading} onClick={handleClick} className="lButton">
-          Login
-        </button>
-        {error && <span>{error.message}</span>}
-      </div>
+    <div className='wrapper'>
+        <form action="">
+            <h1>login</h1>
+            <div className="input-box">
+                <input type="text" placeholder='Username' id="username" onChange={handleChange}/>
+                <FontAwesomeIcon icon={faUser} size="x" className='icon'/>
+            </div>
+            <div className="input-box">
+                <input type="password" placeholder='Password' id="password" onChange={handleChange}/>
+                <FontAwesomeIcon icon={faLock} size="x" className='icon'/>
+            </div>
+
+            <div className="remember-forgot">
+                <label ><input type="checkbox"/>Remember me</label>
+                <a href="#">Forgot password?</a>
+            </div>
+
+            <button type='submit' disabled={loading} onClick={handleClick}>Login</button>
+            {error && <span>{error.message}</span>}
+            <div className="register-link">
+                <p>Khong co tai khoan?<a href="/register">Dang ki</a></p>
+            </div>
+        </form>
     </div>
-  );
+);
 };
 
 export default Login;

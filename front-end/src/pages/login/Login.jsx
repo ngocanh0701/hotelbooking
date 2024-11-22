@@ -2,7 +2,9 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import "./login.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'; // Import icon
+import "../login/login.css";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -10,10 +12,9 @@ const Login = () => {
     password: undefined,
   });
 
-  const { loading, error, dispatch } = useContext(AuthContext);
+  const {user, loading, error, dispatch } = useContext(AuthContext);
 
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
@@ -23,8 +24,23 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post("/auth/login", credentials);
+      const userInfo = res.data.details;
+      const isAdmin = res.data.isAdmin;
+      localStorage.setItem("user", JSON.stringify(userInfo));
+      alert(isAdmin)
+      if (isAdmin===true) {
+        // Nếu là admin, chuyển đến localhost:3005
+        window.location.href = "http://localhost:3005";
+        //navigate("http://localhost:3005");
+      } else {
+        // Nếu không phải admin, chuyển đến trang chính
+        navigate("/");
+      }
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-      navigate("/")
+      //navigate("/");  // Điều hướng đến trang dành cho người dùng
+      
+      //Kiểm tra vai trò của người dùng để điều hướng
+       
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
@@ -32,29 +48,31 @@ const Login = () => {
 
 
   return (
-    <div className="login">
-      <div className="lContainer">
-        <input
-          type="text"
-          placeholder="username"
-          id="username"
-          onChange={handleChange}
-          className="lInput"
-        />
-        <input
-          type="password"
-          placeholder="password"
-          id="password"
-          onChange={handleChange}
-          className="lInput"
-        />
-        <button disabled={loading} onClick={handleClick} className="lButton">
-          Login
-        </button>
-        {error && <span>{error.message}</span>}
-      </div>
+    <div className='wrapper'>
+        <form action="">
+            <h1>login</h1>
+            <div className="input-box">
+                <input type="text" placeholder='Username' id="username" onChange={handleChange}/>
+                <FontAwesomeIcon icon={faUser} size="1x" className='icon'/>
+            </div>
+            <div className="input-box">
+                <input type="password" placeholder='Password' id="password" onChange={handleChange}/>
+                <FontAwesomeIcon icon={faLock} size="1x" className='icon'/>
+            </div>
+
+            <div className="remember-forgot">
+                <label ><input type="checkbox"/>Remember me</label>
+                <a href="#">Forgot password?</a>
+            </div>
+
+            <button type='submit' disabled={loading} onClick={handleClick}>Login</button>
+            {error && <span>{error.message}</span>}
+            <div className="register-link">
+                <p>Khong co tai khoan?<a href="/register">Dang ki</a></p>
+            </div>
+        </form>
     </div>
-  );
+);
 };
 
 export default Login;

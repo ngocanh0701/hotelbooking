@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 const UserSchema = new mongoose.Schema(
   {
+    fullname: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     username: {
       type: String,
       required: true,
@@ -13,14 +18,14 @@ const UserSchema = new mongoose.Schema(
     },
     country: {
       type: String,
-      required: true,
+      required: false,
     },
     img: {
       type: String,
     },
     city: {
       type: String,
-      required: true,
+      required: false,
     },
     phone: {
       type: String,
@@ -32,7 +37,7 @@ const UserSchema = new mongoose.Schema(
     },
     isAdmin: {
       type: Boolean,
-      default: false,
+      required: true,
     },
   },
   { timestamps: true }
