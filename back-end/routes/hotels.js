@@ -8,18 +8,30 @@ import {
   getHotelRooms,
   getHotels,
   updateHotel,
+  getaddress
 } from "../controllers/hotel.js";
 import Hotel from "../models/Hotel.js";
 import {verifyAdmin} from "../utils/verifyToken.js"
+import upload from '../config/multer.js';
 const router = express.Router();
 
 //CREATE
-router.post("/", verifyAdmin, createHotel);
+// router.post("/:id", createHotel);
+router.post(
+  "/:id",
+  upload.fields([
+    { name: "avatar", maxCount: 1 }, // 1 ảnh đại diện
+    { name: "photos", maxCount: 10 }, // Tối đa 10 ảnh minh họa
+  ]),
+  createHotel
+);
 
+router.get("/hotelsaddress",getaddress);
 //UPDATE
-router.put("/:id", verifyAdmin, updateHotel);
+router.put("/:id", updateHotel);
 //DELETE
-router.delete("/:id", verifyAdmin, deleteHotel);
+
+router.delete("/:id", deleteHotel);
 //GET
 
 router.get("/find/:id", getHotel);

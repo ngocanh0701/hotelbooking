@@ -2,11 +2,12 @@ import "./list.css";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
 import useFetch from "../../hooks/useFetch";
+import { normalizeAddress } from "../../hooks/utils";
 
 const List = () => {
   const location = useLocation();
@@ -16,15 +17,18 @@ const List = () => {
   const [options, setOptions] = useState(location.state.options);
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
-
-  const { data, loading, error, reFetch } = useFetch(
-    `/hotels?city=${destination}&min=${min || 0 }&max=${max || 999}`
-  );
-
-  const handleClick = () => {
-    reFetch();
-  };
-
+  //const normalizedDestination = normalizeAddress(destination);
+  const normalizedAddress = normalizeAddress(destination);
+  const { data, loading, error, reFetch } = useFetch( 
+    `http://localhost:8800/api/hotels/hotelsaddress?address=${normalizedAddress}&min=${min || 0}&max=${max || 999}` ); // Add useEffect here 
+  useEffect(() => { 
+    if (data) {
+       console.log('Hotels:', data); // Adjust this based on your API response structure
+        } 
+       }, [data]); 
+    const handleClick = () => { 
+      reFetch(`http://localhost:8800/api/hotels/hotelsaddress?address=${normalizedAddress}&min=${min || 0}&max=${max || 999}`);
+    };
   return (
     <div>
       <Navbar />

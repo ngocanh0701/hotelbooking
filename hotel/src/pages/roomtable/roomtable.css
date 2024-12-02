@@ -1,0 +1,46 @@
+.room-table {
+    width: 80%;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .add-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+    margin-bottom: 10px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+  }
+  
+  .action {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .action.view {
+    color: blue;
+  }
+  
+  .action.delete {
+    color: red;
+  }
+  

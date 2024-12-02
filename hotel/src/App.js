@@ -9,6 +9,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import CreateRoom from "./pages/createRoom/CreateRoom";
 import Statistic from "./pages/statistic/Statistic";
+import Roomtable from "./pages/roomtable/RoomTable";
 
 function App() {
   const isLoggedIn = localStorage.getItem('token'); // Kiểm tra token trong localStorage (hoặc context)
@@ -33,8 +34,9 @@ function App() {
             />
         
         <Route path="/register" element={<Register/>}/>
-        <Route path="/createRoom" element={<CreateRoom/>}/>
+        <Route path="/themphong" element={<CreateRoom/>}/>
         <Route path="/thongke" element={<Statistic/>}/>
+        <Route path="/bangphong" element={<Roomtable/>}/>
       </Routes>
     </BrowserRouter>
   );

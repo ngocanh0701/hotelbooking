@@ -6,11 +6,10 @@ const HotelSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    required: true,
+    required: false,
   },
-  city: {
+  avatar: {
     type: String,
-    required: true,
   },
   address: {
     type: String,
@@ -41,12 +40,20 @@ const HotelSchema = new mongoose.Schema({
   },
   cheapestPrice: {
     type: Number,
-    required: true,
+    required: false,
   },
   featured: {
     type: Boolean,
     default: false,
   },
+  idhotel:{
+    type: String,
+    required: false,
+  }, 
+  userid:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"Userhotel",
+  }
 });
 
 export default mongoose.model("Hotel", HotelSchema)

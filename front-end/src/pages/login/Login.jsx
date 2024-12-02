@@ -24,18 +24,8 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post("/auth/login", credentials);
-      const userInfo = res.data.details;
-      const isAdmin = res.data.isAdmin;
-      localStorage.setItem("user", JSON.stringify(userInfo));
-      alert(isAdmin)
-      if (isAdmin===true) {
-        // Nếu là admin, chuyển đến localhost:3005
-        window.location.href = "http://localhost:3005";
-        //navigate("http://localhost:3005");
-      } else {
-        // Nếu không phải admin, chuyển đến trang chính
+      
         navigate("/");
-      }
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       //navigate("/");  // Điều hướng đến trang dành cho người dùng
       

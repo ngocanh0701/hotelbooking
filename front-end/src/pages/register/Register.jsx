@@ -60,17 +60,7 @@ const Register = () =>{
                     <input type="text" placeholder='So dien thoai ' name='phone' value={formData.phone} onChange={handleChange} required/>
                     <FontAwesomeIcon icon={faPhone} size="x" className='icon'/>
                 </div>
-                <div className="radio-box">
-                    <p>ban dang ki voi muc dich</p>
-                    <form >
-                        <label >
-                            <input type="radio" name='isAdmin' value='false' onChange={handleChange} checked={formData.isAdmin === 'false'}/>la nguoi su dung
-                        </label>
-                        <label >
-                            <input type="radio" name='isAdmin' value='true' onChange={handleChange} checked={formData.isAdmin === 'true'}/>la khach san
-                        </label>
-                    </form>
-                </div>
+                
 
                 <div className="remember-forgot">
                 </div>

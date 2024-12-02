@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 const UserSchema = new mongoose.Schema(
   {
+    fullname:{
+      type: String,
+      required: true,
+      unique: true,
+    },
     username: {
       type: String,
       required: true,
@@ -19,12 +24,12 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    isAdmin: {
-      type: Boolean,
-      required: true,
+    hotelid: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"Hotel",
     },
   },
   { timestamps: true }
 );
 
-export default mongoose.model("User", UserSchema);
+export default mongoose.model("Userhotel", UserSchema);

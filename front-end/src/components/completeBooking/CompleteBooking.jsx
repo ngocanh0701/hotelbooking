@@ -16,7 +16,7 @@ const CompleteBooking = () => {
   return (
     <div className="main">
         <div className="container">
-            <p className="item">Banj da dat phong thanh cong</p>
+            <p className="item">Bạn đã đặt phòng thành công</p>
             <button className="item" type='button' onClick={handleClick}>Về Trang chủ</button>
         </div>
         

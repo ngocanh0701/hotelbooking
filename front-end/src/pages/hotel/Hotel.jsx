@@ -98,18 +98,17 @@ const Hotel = () => {
             </div>
           )}
           <div className="hotelWrapper">
-            <button className="bookNow">Reserve or Book Now!</button>
+            <button className="bookNow">Đặt phòng ngay!</button>
             <h1 className="hotelTitle">{data.name}</h1>
             <div className="hotelAddress">
               <FontAwesomeIcon icon={faLocationDot} />
               <span>{data.address}</span>
             </div>
             <span className="hotelDistance">
-              Excellent location – {data.distance}m from center
+              Vị trí tuyệt vời – {data.distance}m đến trung tâm
             </span>
             <span className="hotelPriceHighlight">
-              Book a stay over ${data.cheapestPrice} at this property and get a
-              free airport taxi
+            Đặt phòng qua đêm ${data.cheapestPrice} Đặt phòng tại cơ sở này và nhận một chuyến taxi ra sân bay miễn phí.
             </span>
             <div className="hotelImages">
               {data.photos?.map((photo, i) => (
@@ -129,16 +128,16 @@ const Hotel = () => {
                 <p className="hotelDesc">{data.desc}</p>
               </div>
               <div className="hotelDetailsPrice">
-                <h1>Perfect for a {days}-night stay!</h1>
+                <h1>Tuyệt vời với {days}- đêm!</h1>
                 <span>
-                  Located in the real heart of Krakow, this property has an
-                  excellent location score of 9.8!
+                Nằm ngay tại trung tâm thực sự của Krakow, địa điểm này có điểm đánh giá vị trí xuất sắc là 9.8!
                 </span>
                 <h2>
-                  <b>${days * data.cheapestPrice * options.room}</b> ({days}{" "}
-                  nights)
+                  <b>{days * data.cheapestPrice * options.room}.000</b> ({days}{" "}
+                  đêm)
                 </h2>
-                <button onClick={handleClick}>Reserve or Book Now!</button>
+                <button onClick={handleClick}>
+                Đặt phòng ngay!</button>
               </div>
             </div>
           </div>

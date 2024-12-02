@@ -10,82 +10,81 @@ import { useNavigate } from 'react-router-dom';
 
 const CreateRoom = () => {
 
-  const [formData, setFormData] = useState({
-    title: '',
-    price: '',
-    maxPeople: '',
-    roomNumbers: '',
-    title: '',
-    desc: '',
-    cheapestPrice: '',
-  });
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  const [rooms, setRooms] = useState("");
+  const [description, setDescription] = useState("");
+  const [maxPeople, setMaxPeople] = useState("");
+  const [hotel, setHotel] = useState("");
 
-
-  const [error, setError] = useState(null);
-  const [isEditing, setIsEditing] = useState(true);
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-      setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = async (e) => {
-      e.preventDefault();
-      setIsEditing(false);
-      try {
-        const res = await axios.post('/hotels', formData);
-        console.log(res.data);
-        //navigate('/login'); // Redirect to login page after successful registration
-      } catch (err) {
-          setError(err.response?.data?.message || 'An error occurred');
-          setIsEditing(true);
-      }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = {
+      title,
+      price,
+      rooms,
+      description,
+      maxPeople,
+      hotel,
+    };
+    console.log("Form Data Submitted:", formData);
+    alert("Form submitted!");
   };
   return (
     <div>
       <Navbar />
       <Header/>
-      <div className='wrapper'>
-        <div className="input-line">
-          <p className="line">Loai phong:</p>
-          <div className="line">
-            <input type="text"  name='name' value={formData.name} onChange={handleChange} disabled={!isEditing} required/>
-          </div>
-        </div>
-
-        <div className="input-line">
-          <p className="line">Mo ta:</p>
-          <div className="line">
-            <input type="text" name='type' value={formData.type} onChange={handleChange} disabled={!isEditing} required/>
-          </div>
-        </div>
-
-        <div className="input-line">
-          <p className="line">Gia:</p>
-          <div className="line">
-            <input type="text"  name='city' value={formData.city} onChange={handleChange}  disabled={!isEditing} required/>
-          </div>
-        </div>
-
-        <div className="input-line">
-          <p className="line">So nguoi o:</p>
-          <div className="line">
-            <input type="textarea"  name='address' value={formData.address} onChange={handleChange} disabled={!isEditing} required/>
-          </div>
-        </div>
-
-
-        <div className="input-line">
-          <p className="line">So phong:</p>
-          <div className="line">
-            <input type="text"  name='title' value={formData.title} onChange={handleChange} disabled={!isEditing} required/>
-          </div>
-        </div>
-
-
-        <button className="button" type="submit" onClick={handleSubmit}>cap nhat</button>
-        {error && <p className="error">{error}</p>} {/* Hiển thị thông báo lỗi nếu có */}
+      <form className="add-room-form" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label>Title</label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Enter room title"
+        />
       </div>
+      <div className="form-group">
+        <label>Price</label>
+        <input
+          type="number"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          placeholder="Enter price"
+        />
+      </div>
+      <div className="form-group">
+        <label>Rooms</label>
+        <textarea
+          value={rooms}
+          onChange={(e) => setRooms(e.target.value)}
+          placeholder="Give comma between room numbers."
+        ></textarea>
+      </div>
+      <div className="form-group">
+        <label>Description</label>
+        <input
+          type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Enter room description"
+        />
+      </div>
+      <div className="form-group">
+        <label>Max People</label>
+        <input
+          type="number"
+          value={maxPeople}
+          onChange={(e) => setMaxPeople(e.target.value)}
+          placeholder="Enter maximum people allowed"
+        />
+      </div>
+      
+      <button type="submit" className="submit-btn">
+        Send
+      </button>
+    </form>
+
       <Footer/>
     </div>
   );

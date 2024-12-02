@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext, AuthContextProvider } from "../../context/AuthContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'; // Import icon
 import "../login/login.css";
@@ -14,8 +14,7 @@ const Login = () => {
 
   const { loading, error, dispatch } = useContext(AuthContext);
 
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
@@ -24,11 +23,11 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("/auth/login", credentials);
-      alert("Dispatch:", dispatch);
+      const res = await axios.post("/auth/loginhotel", credentials);
+      
+        navigate("/");
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-      alert("Dispatch:", dispatch);
-      navigate("/");  // Điều hướng đến trang dành cho người dùng
+      //navigate("/");  // Điều hướng đến trang dành cho người dùng
       
       //Kiểm tra vai trò của người dùng để điều hướng
        

@@ -33,6 +33,7 @@ function App() {
                 element={isLoggedIn ? <Home /> : <Navigate to="/login" />}
             />
         <Route path="/hotels" element={<List/>}/>
+        <Route path="/complete" element={<CompleteBooking/>}/>
         <Route path="/hotels/:id" element={<Hotel/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/hotels/:id/reserve" element={<Reserve/>}/>

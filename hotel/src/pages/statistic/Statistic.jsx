@@ -5,14 +5,8 @@ import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 
 const data = [
-  { id: "672d451a4701457f52e97f40", name: "hotel toan Quang u...", type: "hotel", title: "Best Hotel in the city", city: "berlin" },
-  { id: "67337264e0d50bbd1d17fc93", name: "Hotel HOA HOA 5", type: "hotel", title: "Best Hotel in the city", city: "london" },
-  { id: "67337268e0d50bbd1d17fc95", name: "Hotel HOA HOA 6", type: "hotel", title: "Best Hotel in the city", city: "london" },
-  { id: "673dccff20277a533bdadaf7", name: "Hoang Hoang Hotel", type: "khach san", title: "dsadasda", city: "Hà Nội" },
-  { id: "673dcd0120277a533bdadafd", name: "Hoang Hoang Hotel", type: "khach san", title: "dsadasda", city: "Hà Nội" },
-  { id: "673dcd0120277a533bdadaff", name: "Hoang Hoang Hotel", type: "khach san", title: "dsadasda", city: "Hà Nội" },
-  { id: "673dcd0120277a533bdadb01", name: "Hoang Hoang Hotel", type: "khach san", title: "dsadasda", city: "Hà Nội" },
-  { id: "673dcd0020277a533bdadaf9", name: "Hoang Hoang Hotel", type: "khach san", title: "dsadasda", city: "Hà Nội" },
+  { id: "Hoàng Mai", name: "hoangmai", type: "0934728912", title: "201, 203", city: "20/10/2024", checkout:"24/20/2024" },
+  
 ];
 
 const App = () => {
@@ -27,12 +21,12 @@ const App = () => {
             <th>
               <input type="checkbox" />
             </th>
-            <th>ten nguoi dat</th>
-            <th>email</th>
-            <th>phone</th>
-            <th>phong</th>
-            <th>ngay check in</th>
-            <th>ngay check out</th>
+            <th>Tên Người đặt</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+            <th>Phòng</th>
+            <th>Ngày Check in</th>
+            <th>Ngày Check out</th>
             <th></th>
           </tr>
         </thead>
@@ -47,7 +41,7 @@ const App = () => {
               <td>{item.type}</td>
               <td>{item.title}</td>
               <td>{item.city}</td>
-              
+              <td>{item.checkout}</td>
             </tr>
           ))}
         </tbody>

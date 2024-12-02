@@ -19,7 +19,7 @@ const Navbar = () => {
         </Link>
         {user ? (
           <div className="navItems">
-            <span className="username">Welcome, {user.fullname}!</span>
+            <span className="username">Chào mừng, {user.fullname}!</span>
             <button className="navButton" onClick={handleLogout}>
               Logout
             </button>
