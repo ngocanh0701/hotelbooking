@@ -1,6 +1,6 @@
 import "./newHotel.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
+//import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 import { hotelInputs } from "../../formSource";
@@ -59,9 +59,9 @@ const NewHotel = () => {
     <div className="new">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
+        {/*<Navbar />*/}
         <div className="top">
-          <h1>Add New Product</h1>
+          <h1>Add New Hotel</h1>
         </div>
         <div className="bottom">
           <div className="left">
