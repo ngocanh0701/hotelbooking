@@ -66,6 +66,34 @@ function App() {
                 }
               />
             </Route>
+
+            <Route path="userhotel">
+              <Route
+                index
+                element={
+                  //<ProtectedRoute>
+                    <List columns={userHotelColumns} />
+                  //</ProtectedRoute>
+                }
+              />
+              <Route
+                path=":userId"
+                element={
+                  //<ProtectedRoute>
+                    <Single />
+                  //</ProtectedRoute>
+                }
+              />
+              <Route
+                path="new"
+                element={
+                  //<ProtectedRoute>
+                    <New inputs={userHotelInputs} title="Add New User" />
+                  //</ProtectedRoute>
+                }
+              />
+            </Route>
+                
             <Route path="hotels">
               <Route
                 index
