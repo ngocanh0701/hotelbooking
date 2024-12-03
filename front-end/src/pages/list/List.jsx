@@ -16,19 +16,21 @@ const List = () => {
   const [dates, setDates] = useState(location.state.dates);
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
-  const [min, setMin] = useState(undefined);
-  const [max, setMax] = useState(undefined);
+  // const [min, setMin] = useState(location.state.min);
+  // const [max, setMax] = useState(undefined);
+  const [minPrice, setMinPrice] = useState(location.state.minPrice); // Giá tối thiểu
+  const [maxPrice, setMaxPrice] = useState(location.state.maxPrice);
   //const normalizedDestination = normalizeAddress(destination);
   const normalizedAddress = normalizeAddress(destination);
   const { data, loading, error, reFetch } = useFetch( 
-    `${baseAPI}/hotels/hotelsaddress?address=${normalizedAddress}&min=${min || 0}&max=${max || 999}` ); // Add useEffect here 
+    `${baseAPI}/hotels/hotelsaddress?address=${normalizedAddress}&min=${minPrice || 0}&max=${maxPrice || 999}` ); // Add useEffect here 
   useEffect(() => { 
     if (data) {
        console.log('Hotels:', data); // Adjust this based on your API response structure
         } 
        }, [data]); 
     const handleClick = () => { 
-      reFetch(`${baseAPI}/hotels/hotelsaddress?address=${normalizedAddress}&min=${min || 0}&max=${max || 999}`);
+      reFetch(`${baseAPI}/hotels/hotelsaddress?address=${normalizedAddress}&min=${minPrice || 0}&max=${maxPrice || 999}`);
     };
   return (
     <div>
@@ -65,8 +67,9 @@ const List = () => {
                   </span>
                   <input
                     type="number"
-                    onChange={(e) => setMin(e.target.value)}
+                    onChange={(e) => setMinPrice(e.target.value)}
                     className="lsOptionInput"
+                    placeholder={minPrice ? `${minPrice}.000`:'VND'}
                   />
                 </div>
                 <div className="lsOptionItem">
@@ -75,8 +78,9 @@ const List = () => {
                   </span>
                   <input
                     type="number"
-                    onChange={(e) => setMax(e.target.value)}
+                    onChange={(e) => setMaxPrice(e.target.value)}
                     className="lsOptionInput"
+                    placeholder={maxPrice ? `${maxPrice}.000`:'VND'}
                   />
                 </div>
                 <div className="lsOptionItem">

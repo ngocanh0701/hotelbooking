@@ -82,7 +82,7 @@ export const getaddress = async (req, res) => {
     // Lấy toàn bộ dữ liệu khách sạn từ cơ sở dữ liệu
     const hotels = await Hotel.find({
       ...others,
-      cheapestPrice: { $gt: min | 1, $lt: max || 999 },
+      cheapestPrice: { $gte: min | 1, $lte: max || 999 },
     }).lean();
     
 
