@@ -11,7 +11,7 @@ import { useRoomContext } from "../../context/RoomContext";
 
 const Reserve = ({ setOpen, hotelId }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
-  const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`);
+  const { data, loading, error } = useFetch(`https://hotelbooking-0gxj.onrender.com/api/hotels/room/${hotelId}`);
   const { selectedRoomsInfo, addSelectedRoom, removeSelectedRoom } = useRoomContext();
   const { dates } = useContext(SearchContext);
 

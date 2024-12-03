@@ -14,7 +14,7 @@ const Reserve = () => {
 
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  const { data, loading, error } = useFetch(`/hotels/find/${id}`);
+  const { data, loading, error } = useFetch(`https://hotelbooking-0gxj.onrender.com/api/hotels/find/${id}`);
   const { user } = useContext(AuthContext);
   const { dates, options } = useContext(SearchContext);
   const numberOfAdults = options.adult;
