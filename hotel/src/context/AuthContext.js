@@ -34,6 +34,11 @@ const AuthReducer = (state, action) => {
         loading: false,
         error: null,
       };
+    case "UPDATE_USER": // Thêm hành động UPDATE_USER
+      return {
+        ...state, // Giữ lại các giá trị state cũ
+        user: { ...state.user, ...action.payload }, // Cập nhật thông tin người dùng
+      };
     default:
       return state;
   }
@@ -49,7 +54,9 @@ export const AuthContextProvider = ({ children }) => {
       localStorage.removeItem("user");
     }
   }, [state.user]);
-
+  const updateUser = (newUserData) => {
+    dispatch({ type: "UPDATE_USER", payload: newUserData });
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -57,6 +64,7 @@ export const AuthContextProvider = ({ children }) => {
         loading: state.loading,
         error: state.error,
         dispatch,
+        updateUser,
       }}
     >
       {children}

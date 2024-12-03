@@ -10,6 +10,7 @@ import Register from "./pages/register/Register";
 import CreateRoom from "./pages/createRoom/CreateRoom";
 import Statistic from "./pages/statistic/Statistic";
 import Roomtable from "./pages/roomtable/RoomTable";
+import HotelInfo from "./components/hotelinfor";
 
 function App() {
   const isLoggedIn = localStorage.getItem('token'); // Kiểm tra token trong localStorage (hoặc context)
@@ -20,7 +21,7 @@ function App() {
         <Route
                 path="/"
                 element={
-                    isLoggedIn ? <Navigate to="/" /> : <Home />
+                    isLoggedIn ? <Navigate to="/" /> : <Statistic />
                 }
             />
 
@@ -35,8 +36,9 @@ function App() {
         
         <Route path="/register" element={<Register/>}/>
         <Route path="/themphong" element={<CreateRoom/>}/>
-        <Route path="/thongke" element={<Statistic/>}/>
+        <Route path="/thongtin/:id" element={<Home/>}/>
         <Route path="/bangphong" element={<Roomtable/>}/>
+        <Route path="/hotelinfor" element={<HotelInfo/>}/>
       </Routes>
     </BrowserRouter>
   );

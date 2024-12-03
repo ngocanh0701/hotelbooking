@@ -21,7 +21,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">lamadmin</span>
+          <span className="logo">Admin</span>
         </Link>
       </div>
       <hr />
@@ -39,6 +39,14 @@ const Sidebar = () => {
               <span>Users</span>
             </li>
           </Link>
+
+          <Link to="/userhotel" style={{ textDecoration: "none" }}>
+            <li>
+              <PersonOutlineIcon className="icon" />
+              <span>UserHotel</span>
+            </li>
+          </Link>
+          
           <Link to="/hotels" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />
@@ -51,7 +59,7 @@ const Sidebar = () => {
               <span>Rooms</span>
             </li>
           </Link>
-          <li>
+          {/*<li>
             <LocalShippingIcon className="icon" />
             <span>Delivery</span>
           </li>
@@ -76,7 +84,7 @@ const Sidebar = () => {
           <li>
             <SettingsApplicationsIcon className="icon" />
             <span>Settings</span>
-          </li>
+          </li>*/}
           <p className="title">USER</p>
           <li>
             <AccountCircleOutlinedIcon className="icon" />

@@ -6,6 +6,7 @@ import React, { useState, useEffect, useContext } from "react"; // Sửa lỗi i
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../context/AuthContext"; // Import AuthContext
+import { useHotel } from "../../context/HotelContext";
 
 const Home = () => {
   const [formData, setFormData] = useState({
@@ -30,26 +31,26 @@ const Home = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext); // Lấy dữ liệu người dùng từ context
+  const {hotel, setHotelInfo } = useHotel();
+  const { user,updateUser } = useContext(AuthContext); // Lấy dữ liệu người dùng từ context
+  //const id = user?.id; // Lấy id người dùng từ dữ liệu
   
-  useEffect(() => {
-    const fetchHotelData = async () => {
-      try {
-        if (user?._id) {
-          const res = await axios.get(`http://localhost:8800/api/hotels/${user._id}`); // API lấy dữ liệu khách sạn của user
-          if (res.data) {
-            setFormData(res.data); // Đổ dữ liệu vào form
-            setIsFirstTime(false); // Đặt trạng thái là không phải lần đầu
-          }
-        }
-      } catch (err) {
-        console.error("Error fetching hotel data:", err);
-      }
-    };
-
-    if (!isFirstTime && user) fetchHotelData();
-  }, [isFirstTime, user]);
-
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await axios.get(`/hotels/user/${id}`); // Thêm ID vào endpoint
+  //       if (res.data) {
+  //         setFormData(res.data);
+  //         setIsFirstTime(false);
+  //       }
+  //     } catch (err) {
+  //       console.error("Error fetching user data:", err);
+  //     }
+  //   };
+  //   if (id) {
+  //     fetchData();
+  //   }
+  // }, [id]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -124,6 +125,11 @@ const Home = () => {
     // setLoading(false)
     //setAvatarImage(file); // Lưu vào state, sẽ chứa tất cả các ảnh
   };
+  useEffect(() => {
+    if (hotel) {
+      console.log("Hotel info updated in context:", hotel);
+    }
+  }, [hotel]); 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -135,6 +141,7 @@ const Home = () => {
     formDataToSubmit.append("title", formData.title);
     formDataToSubmit.append("desc", formData.desc);
     formDataToSubmit.append("cheapestPrice", formData.cheapestPrice);
+    formDataToSubmit.append("userid", user._id);
   
     // Thêm ảnh đại diện nếu có
     if (avatarImgUpload ) formDataToSubmit.append("avatar", avatarImgUpload);
@@ -153,17 +160,45 @@ const Home = () => {
       }
       const endpoint = isFirstTime
        ? `http://localhost:8800/api/hotels/${user._id}` 
-       : `http://localhost:8800/api/hotels/updateHotel/${user.hotelid}`;
-
-       const method = isFirstTime ? "post" : "put";
-
-      await axios({ 
-        method, 
+       : '/hotels/update';
+      const res = await axios({ 
+        method: isFirstTime ? 'post' : 'put', 
         url: endpoint, 
         data: formDataToSubmit, 
         headers: { "Content-Type": "multipart/form-data" }
       });
-      if (isFirstTime) setIsFirstTime(false); // Đánh dấu là không phải lần đầu submit
+      // if (isFirstTime) {
+      //   await axios.post(`http://localhost:8800/api/hotels/${user._id}`, formDataToSubmit, {
+      //     headers: { "Content-Type": "multipart/form-data" }
+      //   });
+      // } else {
+      //   await axios.put('/hotels/update', formDataToSubmit, {
+      //     headers: { "Content-Type": "multipart/form-data" }
+      //   });
+      // }
+      const hotelId = res.data._id; // Đảm bảo rằng phản hồi trả về có _id của khách sạn
+      alert(hotelId);
+      //await axios.put(`http://localhost:8800/api/userhotel/${user._id}`, { hotelid: hotelId });
+      //await axios.put(`http://localhost:8800/api/hotels/${hotelId}`, { userid: user._id });
+      const updatedUser = {
+        ...user,
+        hotelid: hotelId, // Giả sử bạn cập nhật tên người dùng
+      };
+      updateUser(updatedUser); 
+      const hotelData = res.data;
+      setHotelInfo(hotelData);
+      console.log("Updated hotel in context:", hotelData);
+      console.log("Updated user in context:", user);
+      alert(hotel);
+      alert(setHotelInfo)
+      alert(hotelData)
+    // Liên kết khách sạn với người dùng (nếu cần)
+    await axios.post(`http://localhost:8800/api/hotels/linkUserHotel/${user._id}`, { hotelid: hotelId });
+
+    // Hiển thị thông báo thành công
+    alert("Hotel created and linked to user successfully!");
+
+      setIsFirstTime(false); // Đánh dấu là không phải lần đầu submit
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred');
       console.error(err);
@@ -171,6 +206,9 @@ const Home = () => {
       setIsSubmitting(false);
     }
   };
+  useEffect(() => {
+    console.log("Updated User: ", user);
+  }, [user]); 
   
   return (
     <div>

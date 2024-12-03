@@ -2,6 +2,7 @@ import React from "react";
 import "./roomtable.css";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
+import { Link } from "react-router-dom";
 import Header from "../../components/header/Header";
 
 
@@ -11,12 +12,13 @@ const Roomtable = () => {
         { title: 'Phòng VIP', description: '2 Giường lớn, 1 phòng khách,...', price: 500, maxPeople: 4 },
         { title: 'Phòng thường', description: 'Giường lớn, 1 Phòng tắm', price: 100, maxPeople: 2 },
       ];
+
   return (
     <div>
         <Navbar />
         <Header/>
         <div className="room-table">
-      <button className="add-button">Add New</button>
+      <button className="add-button"><Link to="/themphong">Add new</Link></button>
       <table>
         <thead>
           <tr>

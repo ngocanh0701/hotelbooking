@@ -1,6 +1,6 @@
 import "./newRoom.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
+//import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 import { roomInputs } from "../../formSource";
@@ -33,7 +33,7 @@ const NewRoom = () => {
     <div className="new">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
+        {/*<Navbar />*/}
         <div className="top">
           <h1>Add New Room</h1>
         </div>

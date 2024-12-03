@@ -29,46 +29,7 @@ export const createHotel = async (req, res, next) => {
     console.error(err);
     res.status(500).json({ message: 'Error creating hotel' });
   }
-
-  // try {
-  //   // Xử lý ảnh đại diện
-  //   const avatarImage = req.files["avatar"] ? req.files["avatar"][0].path : null;
-
-  //   // Xử lý ảnh minh họa
-  //   const photosImages = req.files["photos"]
-  //     ? req.files["photos"].map((file) => file.path)
-  //     : [];
-  //   console.log('Avatar Image:', avatarImage);
-  //   console.log('Photos Images:', photosImages);
-  //   // Tạo dữ liệu khách sạn mới
-  //   const newHotel = new Hotel({
-  //     name,
-  //     address,
-  //     price,
-  //     desc,
-  //     title,
-  //     userId: id,
-  //     avatar: avatarImage, // URL ảnh đại diện
-  //     photos: photosImages, // URL ảnh minh họa
-  //   });
-  //   const savedHotel = await newHotel.save(); // Lưu vào database
-  //   res.status(200).json(savedHotel);
-  // } catch (err) {
-  //   next(err); // Xử lý lỗi
-  // }
 };
-
-// export const createHotel = async (req, res, next) => {
-//   const { id } = req.params;
-//   const newHotel = new Hotel({ ...req.body, userId:id });
-
-//   try {
-//     const savedHotel = await newHotel.save();
-//     res.status(200).json(savedHotel);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
 export const updateHotel = async (req, res, next) => {
   try {
     const updatedHotel = await Hotel.findByIdAndUpdate(
@@ -211,5 +172,42 @@ export const getHotelRooms = async (req, res, next) => {
     res.status(200).json(list)
   } catch (err) {
     next(err);
+  }
+};
+
+export const linkuserhotel = async (req, res, ) => {
+  const { userId } = req.params;
+  const { name, address, title, desc, cheapestPrice, photos, avatar } = req.body;
+
+  try {
+    // Kiểm tra xem user đã có hotel hay chưa
+    const existingHotel = await Hotel.findOne({ user: userId });
+
+    let hotel;
+    if (existingHotel) {
+      // Nếu đã có hotel, cập nhật thông tin khách sạn
+      hotel = await Hotel.findByIdAndUpdate(
+        existingHotel._id,
+        { name, address, title, desc, cheapestPrice, photos, avatar },
+        { new: true }
+      );
+    } else {
+      // Nếu chưa có, tạo mới khách sạn
+      newHotel = new Hotel({ name, address, title, desc, cheapestPrice, photos, avatar, userid: userId });
+      const savedHotel = await newHotel.save();
+      await Userhotel.findByIdAndUpdate(userId, { hotelId: savedHotel._id });
+      res.status(201).json(savedHotel);
+
+      // Cập nhật user với hotelId
+      await User.findByIdAndUpdate(
+        userId,
+        { hotelId: hotel._id },
+        { new: true }
+      );
+    }
+
+    res.status(200).json(hotel);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };

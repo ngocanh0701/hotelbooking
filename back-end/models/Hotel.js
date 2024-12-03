@@ -45,10 +45,6 @@ const HotelSchema = new mongoose.Schema({
   featured: {
     type: Boolean,
     default: false,
-  },
-  idhotel:{
-    type: String,
-    required: false,
   }, 
   userid:{
     type:mongoose.Schema.Types.ObjectId,

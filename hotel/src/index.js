@@ -4,16 +4,19 @@ import App from './App';
 import { AuthContextProvider } from "./context/AuthContext" ;
 import { SearchContextProvider } from "./context/SearchContext";
 import { RoomContextProvider  } from "./context/RoomContext";
+import { HotelProvider } from "./context/HotelContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
+      <HotelProvider>
       <SearchContextProvider>
         <RoomContextProvider>
           <App />
         </RoomContextProvider> 
       </SearchContextProvider>
+      </HotelProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );
