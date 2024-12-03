@@ -85,10 +85,6 @@ export const getaddress = async (req, res) => {
       cheapestPrice: { $gt: min | 1, $lt: max || 999 },
     }).lean();
     
-    console.log("Danh sách địa chỉ khách sạn:");
-    hotels.forEach((hotel) => {
-      console.log(`Tên khách sạn: ${hotel.name}, Địa chỉ: ${hotel.address}`);
-    });
 
     // Lọc các khách sạn dựa trên địa chỉ đã chuẩn hóa
     const filteredHotels = hotels.filter((hotel) => {

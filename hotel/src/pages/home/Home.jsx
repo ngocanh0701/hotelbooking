@@ -159,8 +159,8 @@ const Home = () => {
         return;
       }
       const endpoint = isFirstTime
-       ? `https://hotelbooking-0gxj.onrender.com/api/hotels/${user._id}` 
-       : '/hotels/update';
+       ? `${baseAPI}/hotels/${user._id}` 
+       : `${baseAPI}/hotels/updatehotel`;
       const res = await axios({ 
         method: isFirstTime ? 'post' : 'put', 
         url: endpoint, 
@@ -193,7 +193,7 @@ const Home = () => {
       alert(setHotelInfo)
       alert(hotelData)
     // Liên kết khách sạn với người dùng (nếu cần)
-    await axios.post(`https://hotelbooking-0gxj.onrender.com/api/hotels/linkUserHotel/${user._id}`, { hotelid: hotelId });
+    await axios.post(`${baseAPI}/hotels/linkUserHotel/${user._id}`, { hotelid: hotelId });
 
     // Hiển thị thông báo thành công
     alert("Hotel created and linked to user successfully!");

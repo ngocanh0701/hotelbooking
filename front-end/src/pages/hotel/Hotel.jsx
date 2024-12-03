@@ -16,6 +16,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import Reserve from "../../components/reserve/Reserve";
+import { baseAPI } from "../../hooks/utils";
 
 const Hotel = () => {
   const location = useLocation();
@@ -24,7 +25,7 @@ const Hotel = () => {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
-  const { data, loading, error } = useFetch(`https://hotelbooking-0gxj.onrender.com/api/hotels/find/${id}`);
+  const { data, loading, error } = useFetch(`${baseAPI}/hotels/find/${id}`);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 

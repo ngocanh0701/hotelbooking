@@ -8,10 +8,11 @@ import { SearchContext } from "../../context/SearchContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useRoomContext } from "../../context/RoomContext";
+import { baseAPI } from "../../hooks/utils";
 
 const Reserve = ({ setOpen, hotelId }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
-  const { data, loading, error } = useFetch(`https://hotelbooking-0gxj.onrender.com/api/hotels/room/${hotelId}`);
+  const { data, loading, error } = useFetch(`${baseAPI}/hotels/room/${hotelId}`);
   const { selectedRoomsInfo, addSelectedRoom, removeSelectedRoom } = useRoomContext();
   const { dates } = useContext(SearchContext);
 
@@ -62,7 +63,7 @@ const Reserve = ({ setOpen, hotelId }) => {
     try {
       await Promise.all(
         selectedRooms.map((roomId) => {
-          const res = axios.put(`/rooms/availability/${roomId}`, {
+          const res = axios.put(`${baseAPI}/rooms/availability/${roomId}`, {
             dates: alldates,
           });
           return res.data;

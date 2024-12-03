@@ -1,8 +1,9 @@
 import useFetch from "../../hooks/useFetch";
 import "./featuredProperties.css";
+import { baseAPI } from "../../hooks/utils";
 
 const FeaturedProperties = () => {
-  const { data, loading } = useFetch("https://hotelbooking-0gxj.onrender.com/api/hotels?featured=true&limit=4");
+  const { data, loading } = useFetch(`${baseAPI}/hotels?featured=true&limit=4`);
 
   return (
     <div className="fp">

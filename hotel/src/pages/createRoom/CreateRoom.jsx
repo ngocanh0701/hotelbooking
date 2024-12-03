@@ -50,7 +50,7 @@ const CreateRoom = () => {
           roomNumbers,
         });
         try {
-          const res = await axios.post(`https://hotelbooking-0gxj.onrender.com/api/rooms/${user.hotelid}`, { ...formData, roomNumbers });
+          const res = await axios.post(`${baseAPI}/rooms/${user.hotelid}`, { ...formData, roomNumbers });
           console.log(res.data);
         } catch (err) {
           console.log(err);

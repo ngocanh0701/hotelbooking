@@ -9,12 +9,13 @@ import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import { useRoomContext } from "../../context/RoomContext";
 import "./reserve.css";
+import { baseAPI } from '../../hooks/utils';
 
 const Reserve = () => {
 
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  const { data, loading, error } = useFetch(`https://hotelbooking-0gxj.onrender.com/api/hotels/find/${id}`);
+  const { data, loading, error } = useFetch(`${baseAPI}/hotels/find/${id}`);
   const { user } = useContext(AuthContext);
   const { dates, options } = useContext(SearchContext);
   const numberOfAdults = options.adult;
@@ -118,8 +119,12 @@ const Reserve = () => {
 
     try {
       // Giả sử bạn đang gửi dữ liệu này lên một API
-      const response = await axios.post(`https://hotelbooking-0gxj.onrender.com/api/detail/${user._id}`, bookingData);
+      const response = await axios.post(`${baseAPI}/detail/${user._id}`, bookingData);
       console.log('Dữ liệu đã được cập nhật:', response.data);
+      
+      const urlmomo = await axios.post(`${baseAPI}/momo/payment?amount=${totalPrice}`);
+      console.log('Dữ liệu đã được cập nhật:', urlmomo.payUrl);
+      navigate(`${urlmomo.payUrl}`);
       navigate(`/hotels/${id}/reserve/complete`);
     } catch (error) {
       console.error('Lỗi khi cập nhật dữ liệu:', error);

@@ -1,9 +1,9 @@
 import useFetch from "../../hooks/useFetch";
 import "./featured.css";
-
+import { baseAPI } from "../../hooks/utils";
 const Featured = () => {
   const { data, loading, error } = useFetch(
-    "https://hotelbooking-0gxj.onrender.com/api/hotels/countByCity?cities=berlin,madrid,london"
+    `${baseAPI}/hotels/countByCity?cities=berlin,madrid,london`
   );
 
   return (

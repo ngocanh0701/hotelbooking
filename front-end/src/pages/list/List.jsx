@@ -8,6 +8,7 @@ import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
 import useFetch from "../../hooks/useFetch";
 import { normalizeAddress } from "../../hooks/utils";
+import { baseAPI } from "../../hooks/utils";
 
 const List = () => {
   const location = useLocation();
@@ -20,14 +21,14 @@ const List = () => {
   //const normalizedDestination = normalizeAddress(destination);
   const normalizedAddress = normalizeAddress(destination);
   const { data, loading, error, reFetch } = useFetch( 
-    `https://hotelbooking-0gxj.onrender.com/api/hotels/hotelsaddress?address=${normalizedAddress}&min=${min || 0}&max=${max || 999}` ); // Add useEffect here 
+    `${baseAPI}/hotels/hotelsaddress?address=${normalizedAddress}&min=${min || 0}&max=${max || 999}` ); // Add useEffect here 
   useEffect(() => { 
     if (data) {
        console.log('Hotels:', data); // Adjust this based on your API response structure
         } 
        }, [data]); 
     const handleClick = () => { 
-      reFetch(`https://hotelbooking-0gxj.onrender.com/api/hotels/hotelsaddress?address=${normalizedAddress}&min=${min || 0}&max=${max || 999}`);
+      reFetch(`${baseAPI}/hotels/hotelsaddress?address=${normalizedAddress}&min=${min || 0}&max=${max || 999}`);
     };
   return (
     <div>

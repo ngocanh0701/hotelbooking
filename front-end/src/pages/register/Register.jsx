@@ -4,6 +4,7 @@ import '../register/register.css';
 import { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { baseAPI } from '../../hooks/utils';
 import { faUser, faLock, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'; // Import icon
 const Register = () =>{
 
@@ -26,7 +27,7 @@ const Register = () =>{
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const res = await axios.post('https://hotelbooking-0gxj.onrender.com/api/auth/register', formData);
+          const res = await axios.post(`${baseAPI}/auth/register`, formData);
           console.log(res.data);
           navigate('/login'); // Redirect to login page after successful registration
         } catch (err) {

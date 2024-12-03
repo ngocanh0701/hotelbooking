@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'; // Import icon
+import { baseAPI } from "../../hooks/utils";
 import "../login/login.css";
+
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -23,7 +25,7 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("https://hotelbooking-0gxj.onrender.com/api/auth/login", credentials);
+      const res = await axios.post(`${baseAPI}/auth/login`, credentials);
       
         navigate("/");
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
