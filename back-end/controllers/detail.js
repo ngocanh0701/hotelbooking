@@ -1,15 +1,16 @@
 import Detail from "../models/Detail.js";
+import Hotel from "../models/Hotel.js";
 import User  from "../models/User.js";
 import { createError } from "../utils/error.js";
 
 export const createDetail = async (req, res, next) => {
-  const userId = req.params.userid;
+  const userid = req.params.userid;
   const newDetail = new Detail(req.body);
 
   try {
     const savedDetail = await newDetail.save();
     try {
-      await User.findByIdAndUpdate(userId, {
+      await User.findByIdAndUpdate(userid, {
         $push: { details: savedDetail._id },
       });
     } catch (err) {
@@ -17,6 +18,7 @@ export const createDetail = async (req, res, next) => {
     }
     res.status(200).json(savedDetail);
   } catch (err) {
+    console.error("Error saving room:", err.message);
     next(err);
   }
 };

@@ -94,9 +94,9 @@ const Reserve = () => {
     const data1 = {
       amount: tongtien, // Truyền tham số amount vào body
     };
-    const URLMOMO="";
+    let URLMOMO="";
     console.log('tong tien', tongtien);
-    const re ="";
+    let re ="";
     try {
       //taoj link thanh toan momo
       const urlmomo = await axios.post(`${baseAPI}/momo/payment`, data1)
@@ -104,7 +104,7 @@ const Reserve = () => {
         console.log("Payment response:", urlmomo.data); // Xử lý kết quả trả về từ API
         const urlmo = urlmomo.data;
         URLMOMO=urlmo;
-        //console.log('du lieu da dc cap nhat', urlmo.payUrl);
+        console.log('du lieu da dc cap nhat', urlmo.payUrl);
         if (urlmo.payUrl) {
           window.location.href = urlmo.payUrl;  // Điều hướng đến payUrl bên ngoài
         } else {

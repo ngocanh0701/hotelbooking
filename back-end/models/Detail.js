@@ -43,6 +43,9 @@ const DetailSchema = new mongoose.Schema({
     type:Boolean,
     default:true,
   },
+  idhotel:{
+    type:String
+  },
   iduser: {
     type:String,
     default:false,

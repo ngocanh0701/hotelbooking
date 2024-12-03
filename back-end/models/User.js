@@ -40,7 +40,7 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
     details:{
-      type:{String},
+      type:[String],
     }
   },
   { timestamps: true }
