@@ -80,6 +80,8 @@ export const checkTransaction = async (req, res) => {
     const response = await axios.post('https://test-payment.momo.vn/v2/gateway/api/query', requestBody, {
       headers: { 'Content-Type': 'application/json' },
     });
+    console.log(requestBody);
+    
     res.status(200).json(response.data); // Trả về kết quả giao dịch
   } catch (error) {
     res.status(500).json({ message: 'Lỗi kiểm tra giao dịch', error: error.message });

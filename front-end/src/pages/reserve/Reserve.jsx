@@ -118,7 +118,7 @@ const Reserve = () => {
 
     try {
       // Giả sử bạn đang gửi dữ liệu này lên một API
-      const response = await axios.post(`http://localhost:8800/api/detail/${user._id}`, bookingData);
+      const response = await axios.post(`https://hotelbooking-0gxj.onrender.com/api/detail/${user._id}`, bookingData);
       console.log('Dữ liệu đã được cập nhật:', response.data);
       navigate(`/hotels/${id}/reserve/complete`);
     } catch (error) {

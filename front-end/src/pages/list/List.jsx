@@ -20,14 +20,14 @@ const List = () => {
   //const normalizedDestination = normalizeAddress(destination);
   const normalizedAddress = normalizeAddress(destination);
   const { data, loading, error, reFetch } = useFetch( 
-    `http://localhost:8800/api/hotels/hotelsaddress?address=${normalizedAddress}&min=${min || 0}&max=${max || 999}` ); // Add useEffect here 
+    `https://hotelbooking-0gxj.onrender.com/api/hotels/hotelsaddress?address=${normalizedAddress}&min=${min || 0}&max=${max || 999}` ); // Add useEffect here 
   useEffect(() => { 
     if (data) {
        console.log('Hotels:', data); // Adjust this based on your API response structure
         } 
        }, [data]); 
     const handleClick = () => { 
-      reFetch(`http://localhost:8800/api/hotels/hotelsaddress?address=${normalizedAddress}&min=${min || 0}&max=${max || 999}`);
+      reFetch(`https://hotelbooking-0gxj.onrender.com/api/hotels/hotelsaddress?address=${normalizedAddress}&min=${min || 0}&max=${max || 999}`);
     };
   return (
     <div>
