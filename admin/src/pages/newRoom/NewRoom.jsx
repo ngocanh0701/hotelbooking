@@ -6,6 +6,7 @@ import { useState } from "react";
 import { roomInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
+import { baseAPI } from "../../hooks/utils";
 
 const NewRoom = () => {
   const [info, setInfo] = useState({});

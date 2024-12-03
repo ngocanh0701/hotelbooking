@@ -9,6 +9,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../context/AuthContext";
 import { HotelProvider, HotelContext } from "../../context/HotelContext";
+import { baseAPI } from "../../hooks/utils";
 
 const CreateRoom = () => {
 

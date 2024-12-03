@@ -46,6 +46,9 @@ const DetailSchema = new mongoose.Schema({
   iduser: {
     type:String,
     default:false,
+  },
+  status:{
+    type:String,
   }
 });
 

@@ -7,6 +7,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../context/AuthContext"; // Import AuthContext
 import { useHotel } from "../../context/HotelContext";
+import { baseAPI } from "../../hooks/utils";
 
 const Home = () => {
   const [formData, setFormData] = useState({

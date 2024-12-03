@@ -3,7 +3,7 @@ const config = {
     secretKey: 'K951B6PE1waDMi640xX08PD3vg6EkVlz',
     orderInfo: 'pay with MoMo',
     partnerCode: 'MOMO',
-    redirectUrl: 'http://localhost:5000/views/home.html',
+    redirectUrl: 'http://localhost:3000/complete',
     ipnUrl: 'https://hotelbooking-0gxj.onrender.com/api/momo/callback', //chú ý: cần dùng ngrok thì momo mới post đến url này được
     requestType: 'payWithMethod',
     extraData: '',
