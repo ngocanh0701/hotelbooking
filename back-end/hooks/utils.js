@@ -11,3 +11,5 @@ export const normalizeAddress = (address) => {
 };
 
 export default normalizeAddress;
+
+export const baseAPI = "https://hotelbooking-0gxj.onrender.com/api";
