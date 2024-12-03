@@ -4,7 +4,7 @@ const config = {
     orderInfo: 'pay with MoMo',
     partnerCode: 'MOMO',
     redirectUrl: 'http://localhost:5000/views/home.html',
-    ipnUrl: 'https://0778-14-178-58-205.ngrok-free.app/callback', //chú ý: cần dùng ngrok thì momo mới post đến url này được
+    ipnUrl: 'https://hotelbooking-0gxj.onrender.com/api/momo/callback', //chú ý: cần dùng ngrok thì momo mới post đến url này được
     requestType: 'payWithMethod',
     extraData: '',
     orderGroupId: '',
