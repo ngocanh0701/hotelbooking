@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("/auth/login", credentials);
+      const res = await axios.post("https://hotelbooking-0gxj.onrender.com/api/auth/login", credentials);
       
         navigate("/");
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
