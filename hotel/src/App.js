@@ -39,6 +39,7 @@ function App() {
         <Route path="/thongtin/:id" element={<Home/>}/>
         <Route path="/bangphong" element={<Roomtable/>}/>
         <Route path="/hotelinfor" element={<HotelInfo/>}/>
+       
       </Routes>
     </BrowserRouter>
   );

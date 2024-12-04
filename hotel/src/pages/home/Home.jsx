@@ -179,7 +179,6 @@ const Home = () => {
       //   });
       // }
       const hotelId = res.data._id; // Đảm bảo rằng phản hồi trả về có _id của khách sạn
-      alert(hotelId);
       //await axios.put(`http://localhost:8800/api/userhotel/${user._id}`, { hotelid: hotelId });
       //await axios.put(`http://localhost:8800/api/hotels/${hotelId}`, { userid: user._id });
       const updatedUser = {
@@ -191,9 +190,6 @@ const Home = () => {
       setHotelInfo(hotelData);
       console.log("Updated hotel in context:", hotelData);
       console.log("Updated user in context:", user);
-      alert(hotel);
-      alert(setHotelInfo)
-      alert(hotelData)
     // Liên kết khách sạn với người dùng (nếu cần)
     await axios.post(`${baseAPI}/hotels/linkUserHotel/${user._id}`, { hotelid: hotelId });
 

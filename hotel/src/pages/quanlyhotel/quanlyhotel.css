@@ -1,0 +1,33 @@
+.info-container {
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  .info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .details-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .info-row {
+    margin-bottom: 15px;
+  }
+  .info-row label {
+    font-weight: bold;
+  }
+  .gallery {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
