@@ -13,13 +13,13 @@ const router = express.Router();
 //UPDATE
 router.put("/:id", updateUserhotel);
 //DELETE
-router.delete("/:id", verifyUser, deleteUserhotel);
+router.delete("/:id", deleteUserhotel);
 
 //GET
-router.get("/:id", verifyUser, getUserhotel);
+router.get("/:id", getUserhotel);
 
 //GET ALL
-router.get("/", verifyAdmin, getUsershotel);
+router.get("/", getUsershotel);
 
 //router.get("/getuser", getUserbyNPhotel);
 export default router;
