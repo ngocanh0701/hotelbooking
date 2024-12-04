@@ -34,25 +34,7 @@ const Home = () => {
   const navigate = useNavigate();
   const {hotel, setHotelInfo } = useHotel();
   const { user,updateUser } = useContext(AuthContext); // Lấy dữ liệu người dùng từ context
-  //const id = user?.id; // Lấy id người dùng từ dữ liệu
   
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const res = await axios.get(`/hotels/user/${id}`); // Thêm ID vào endpoint
-  //       if (res.data) {
-  //         setFormData(res.data);
-  //         setIsFirstTime(false);
-  //       }
-  //     } catch (err) {
-  //       console.error("Error fetching user data:", err);
-  //     }
-  //   };
-  //   if (id) {
-  //     fetchData();
-  //   }
-  // }, [id]);
-
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
