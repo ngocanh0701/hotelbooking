@@ -139,18 +139,18 @@ export const countByCity = async (req, res, next) => {
 };
 export const countByType = async (req, res, next) => {
   try {
-    const hotelCount = await Hotel.countDocuments({ type: "hotel" });
-    const apartmentCount = await Hotel.countDocuments({ type: "apartment" });
+    const hotelCount = await Hotel.countDocuments({ type: "khách sạn" });
+    const apartmentCount = await Hotel.countDocuments({ type: "căn hộ" });
     const resortCount = await Hotel.countDocuments({ type: "resort" });
-    const villaCount = await Hotel.countDocuments({ type: "villa" });
-    const cabinCount = await Hotel.countDocuments({ type: "cabin" });
+    const homestayCount = await Hotel.countDocuments({ type: "homestay" });
+    const nhanghiCount = await Hotel.countDocuments({ type: "nhà nghỉ" });
 
     res.status(200).json([
-      { type: "hotel", count: hotelCount },
-      { type: "apartments", count: apartmentCount },
+      { type: "khách sạn", count: hotelCount },
+      { type: "căn hộ", count: apartmentCount },
       { type: "resorts", count: resortCount },
-      { type: "villas", count: villaCount },
-      { type: "cabins", count: cabinCount },
+      { type: "homestay", count: homestayCount },
+      { type: "nhanghi", count: nhanghiCount },
     ]);
   } catch (err) {
     next(err);

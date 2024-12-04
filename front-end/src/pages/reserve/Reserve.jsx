@@ -106,48 +106,61 @@ const Reserve = () => {
         URLMOMO=urlmo;
         console.log('du lieu da dc cap nhat', urlmo.payUrl);
         if (urlmo.payUrl) {
-          window.location.href = urlmo.payUrl;  // Điều hướng đến payUrl bên ngoài
+          window.location.href = urlmo.payUrl; 
+          console.log(urlmo.orderId);
+           // Điều hướng đến payUrl bên ngoài
         } else {
           console.error("payUrl không có trong phản hồi");
         }
       })
+      console.log( URLMOMO.orderId);
+      const data2 = {
+        orderId: URLMOMO.orderId, // Truyền tham số amount vào body
+      };
       // tra ve tinh trang đã thanh toán hay chưa
-      const checkstatus = await axios.post(`${baseAPI}/momo/check-status`, URLMOMO.orderId)
+      const checkstatus = await axios.post(`${baseAPI}/momo/check-status`, data2)
         .then(checkstatus => {
           console.log("Payment response:", checkstatus.data); // Xử lý kết quả trả về từ API
           const result = checkstatus.data;
           //console.log('du lieu da dc cap nhat', urlmo.payUrl);
-          const re ="";
+          let re ="";
           if (result.resultCode == 0 ) {
             re = "đã thanh toán";
           } else {
             re = "chưa thanh toán";
             console.error("payUrl không có trong phản hồi");
           }})
+          try{
+            const bookingData = {
+              fullname: dataform.fullname,
+              email: dataform.email,
+              phone: dataform.phone,
+              name: data.name,  // Lấy từ dữ liệu khách sạn
+              IDhotel: id,
+              address: data.address,
+              room: roomsData,  // Dữ liệu phòng
+              checkIn: dates[0].startDate.toISOString(), // Chuyển thành dạng ISO
+              checkOut: dates[0].endDate.toISOString(),
+              guests: `${numberOfAdults} adult${numberOfAdults > 1 ? "s" : ""}, ${numberOfChildren} child${numberOfChildren > 1 ? "ren" : ""}`, // Khách
+              total: totalPrice,
+              whoReverse: dataform.whoReserve,
+              status: re,
+            };
+            // Giả sử bạn đang gửi dữ liệu này lên một API
+            const response = await axios.post(`${baseAPI}/detail/${user._id}`, bookingData);
+            console.log('Dữ liệu đã được cập nhật:', response.data);
+            navigate(`/hotels/${id}/reserve/complete`);
+
+          }catch(error) {
+              console.error('Lỗi khi cập nhật dữ liệu:', error);
+          }
           // tạo dữ liệu để update lên database
-      const bookingData = {
-        fullname: dataform.fullname,
-        email: dataform.email,
-        phone: dataform.phone,
-        name: data.name,  // Lấy từ dữ liệu khách sạn
-        IDhotel: id,
-        address: data.address,
-        room: roomsData,  // Dữ liệu phòng
-        checkIn: dates[0].startDate.toISOString(), // Chuyển thành dạng ISO
-        checkOut: dates[0].endDate.toISOString(),
-        guests: `${numberOfAdults} adult${numberOfAdults > 1 ? "s" : ""}, ${numberOfChildren} child${numberOfChildren > 1 ? "ren" : ""}`, // Khách
-        total: totalPrice,
-        whoReverse: dataform.whoReserve,
-        status: re,
-      };
-      // Giả sử bạn đang gửi dữ liệu này lên một API
-      const response = await axios.post(`${baseAPI}/detail/${user._id}`, bookingData);
-      console.log('Dữ liệu đã được cập nhật:', response.data);
-      navigate(`/hotels/${id}/reserve/complete`);
     } catch (error) {
       console.error('Lỗi khi cập nhật dữ liệu:', error);
-      alert('Có lỗi khi cập nhật dữ liệu!');
-      alert(user._id)
+      console.log(error.message)
+      console.log(error.stack)
+      // alert('Có lỗi khi cập nhật dữ liệu!');
+      // alert(user._id)
     }
   };
 

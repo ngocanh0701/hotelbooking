@@ -2,9 +2,16 @@ import useFetch from "../../hooks/useFetch";
 import "./featured.css";
 import { baseAPI } from "../../hooks/utils";
 const Featured = () => {
+  const cities = ["Hà Giang", "Đà Nẵng", "Hồ Chí Minh"];
+  const encodedCities = cities.map(city => encodeURIComponent(city)).join(",");
+  const url = `${baseAPI}/hotels/countByCity?cities=${encodedCities}`;
+  console.log(url);
   const { data, loading, error } = useFetch(
-    `${baseAPI}/hotels/countByCity?cities=berlin,madrid,london`
+    url
+    //`${baseAPI}/hotels/countByCity?cities=berlin,madrid,london`
   );
+  console.log("Dữ liệu API trả về:", data);
+
 
   return (
     <div className="featured">
@@ -19,8 +26,8 @@ const Featured = () => {
               className="featuredImg"
             />
             <div className="featuredTitles">
-              <h1>Cao Bằng</h1>
-              <h2>{data[0]} properties</h2>
+              <h1>Hà Giang</h1>
+              <h2>{data[0]} lựa chọn</h2>
             </div>
           </div>
 
@@ -32,7 +39,7 @@ const Featured = () => {
             />
             <div className="featuredTitles">
               <h1>TP Hồ Chí Minh</h1>
-              <h2>{data[1]} properties</h2>
+              <h2>{data[2]} lựa chọn</h2>
             </div>
           </div>
           <div className="featuredItem">
@@ -43,7 +50,7 @@ const Featured = () => {
             />
             <div className="featuredTitles">
               <h1>Đà Nẵng</h1>
-              <h2>{data[2]} properties</h2>
+              <h2>{data[1]} lựa chọn</h2>
             </div>
           </div>
         </>
