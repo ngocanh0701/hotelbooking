@@ -139,6 +139,7 @@ const Home = () => {
     const formDataToSubmit = new FormData();
     formDataToSubmit.append("name", formData.name);
     formDataToSubmit.append("address", formData.address);
+    formDataToSubmit.append("type", formData.type);
     formDataToSubmit.append("title", formData.title);
     formDataToSubmit.append("desc", formData.desc);
     formDataToSubmit.append("cheapestPrice", formData.cheapestPrice);

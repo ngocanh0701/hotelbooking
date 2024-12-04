@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'; // Import icon
+import { baseAPI } from '../../hooks/utils';
 const Register = () =>{
 
     const [formData, setFormData] = useState({
@@ -26,7 +27,7 @@ const Register = () =>{
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const res = await axios.post('/auth/register', formData);
+          const res = await axios.post(`${baseAPI}/auth/register`, formData);
           console.log(res.data);
           navigate('/login'); // Redirect to login page after successful registration
         } catch (err) {
