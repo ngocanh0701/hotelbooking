@@ -12,7 +12,7 @@ const Login = () => {
     username: undefined,
     password: undefined,
   });
-
+  const {user} =useContext(AuthContext);
   const { loading, error, dispatch } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const Login = () => {
     try {
       const res = await axios.post(`${baseAPI}/auth/loginhotel`, credentials);
       
-        navigate("/");
+        navigate(`/thongtin/${user._id}`);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       //navigate("/");  // Điều hướng đến trang dành cho người dùng
       

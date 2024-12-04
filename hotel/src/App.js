@@ -18,22 +18,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Trang chủ mặc định */}
-        <Route
-                path="/"
-                element={
-                    isLoggedIn ? <Navigate to="/" /> : <Statistic />
-                }
-            />
-
-            {/* Trang đăng nhập */}
-            <Route path="/login" element={<Login />} />
-
-            {/* Trang Home (sau khi đăng nhập) */}
-            <Route
-                path="/"
-                element={isLoggedIn ? <Home /> : <Navigate to="/login" />}
-            />
-        
+        <Route path="/" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/themphong" element={<CreateRoom/>}/>
         <Route path="/thongtin/:id" element={<Home/>}/>

@@ -124,7 +124,7 @@ const Reserve = () => {
           const result = checkstatus.data;
           //console.log('du lieu da dc cap nhat', urlmo.payUrl);
           let re ="";
-          if (result.resultCode == 0 ) {
+          if (result.resultCode === 0 ) {
             re = "đã thanh toán";
           } else {
             re = "chưa thanh toán";
