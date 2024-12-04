@@ -78,7 +78,7 @@ function App() {
                 }
               />
               <Route
-                path=":userId"
+                path=":userhotel"
                 element={
                   <ProtectedRoute>
                     <Single />
