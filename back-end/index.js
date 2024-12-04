@@ -35,8 +35,7 @@ app.use(cors({
     "http://localhost:3000",
 
     "http://localhost:3005", 
-    "https://hotelbooking-chj08enw5-ngocanh0701s-projects.vercel.app",
-
+    "https://hotelbookinghotel-nine.vercel.app",
 
     "http://localhost:4000",
     "https://hotelbookingadmin.vercel.app",
