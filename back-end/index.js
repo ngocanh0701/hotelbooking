@@ -31,7 +31,7 @@ mongoose.connection.on("disconnected", () => {
 
 //middlewares
 app.use(cors({
-  origin : ["https://hotelbookingui.vercel.app", "http://localhost:3000", ],
+  origin : ["https://hotelbookingui.vercel.app", "http://localhost:3000","http://localhost:3005", "http://localhost:3001" ],
   credentials: true, 
 }));
 app.use(cookieParser());
