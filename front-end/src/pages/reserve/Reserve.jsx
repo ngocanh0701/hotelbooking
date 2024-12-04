@@ -67,103 +67,154 @@ const Reserve = () => {
   };
   const days = dayDifference(dates[0].endDate, dates[0].startDate);
 
+  // const handleClick = async (e) => {
+  //   e.preventDefault();
+
+  //   const roomsData = selectedRoomsInfo.map((room) => ({
+  //     title: room.title,
+  //     roomNumber: room.roomNumber,
+  //   }));
+
+  //   // const bookingData = {
+  //   //   fullname: dataform.fullname,
+  //   //   email: dataform.email,
+  //   //   phone: dataform.phone,
+  //   //   name: data.name,  // Lấy từ dữ liệu khách sạn
+  //   //   IDhotel: id,
+  //   //   address: data.address,
+  //   //   room: roomsData,  // Dữ liệu phòng
+  //   //   checkIn: dates[0].startDate.toISOString(), // Chuyển thành dạng ISO
+  //   //   checkOut: dates[0].endDate.toISOString(),
+  //   //   guests: `${numberOfAdults} adult${numberOfAdults > 1 ? "s" : ""}, ${numberOfChildren} child${numberOfChildren > 1 ? "ren" : ""}`, // Khách
+  //   //   total: totalPrice,
+  //   //   whoReverse: dataform.whoReserve,
+  //   //   status:
+  //   // };
+  //   const tongtien = totalPrice*1000;
+  //   const data1 = {
+  //     amount: tongtien, // Truyền tham số amount vào body
+  //   };
+  //   let URLMOMO="";
+  //   console.log('tong tien', tongtien);
+  //   let re ="";
+  //   try {
+  //     //taoj link thanh toan momo
+  //     const urlmomo = await axios.post(`${baseAPI}/momo/payment`, data1)
+  //     .then(urlmomo => {
+  //       console.log("Payment response:", urlmomo.data); // Xử lý kết quả trả về từ API
+  //       const urlmo = urlmomo.data;
+  //       URLMOMO=urlmo;
+  //       console.log('du lieu da dc cap nhat', urlmo.payUrl);
+  //       if (urlmo.payUrl) {
+  //         window.location.href = urlmo.payUrl; 
+  //         console.log(urlmo.orderId);
+  //          // Điều hướng đến payUrl bên ngoài
+  //       } else {
+  //         console.error("payUrl không có trong phản hồi");
+  //       }
+  //     })
+  //     console.log( URLMOMO.orderId);
+  //     const data2 = {
+  //       orderId: URLMOMO.orderId, // Truyền tham số amount vào body
+  //     };
+  //     // tra ve tinh trang đã thanh toán hay chưa
+  //     const checkstatus = await axios.post(`${baseAPI}/momo/check-status`, data2)
+  //       .then(checkstatus => {
+  //         console.log("Payment response:", checkstatus.data); // Xử lý kết quả trả về từ API
+  //         const result = checkstatus.data;
+  //         //console.log('du lieu da dc cap nhat', urlmo.payUrl);
+  //         let re ="";
+  //         if (result.resultCode == 0 ) {
+  //           re = "đã thanh toán";
+  //         } else {
+  //           re = "chưa thanh toán";
+  //           console.error("payUrl không có trong phản hồi");
+  //         }})
+  //         try{
+  //           const bookingData = {
+  //             fullname: dataform.fullname,
+  //             email: dataform.email,
+  //             phone: dataform.phone,
+  //             name: data.name,  // Lấy từ dữ liệu khách sạn
+  //             IDhotel: id,
+  //             address: data.address,
+  //             room: roomsData,  // Dữ liệu phòng
+  //             checkIn: dates[0].startDate.toISOString(), // Chuyển thành dạng ISO
+  //             checkOut: dates[0].endDate.toISOString(),
+  //             guests: `${numberOfAdults} adult${numberOfAdults > 1 ? "s" : ""}, ${numberOfChildren} child${numberOfChildren > 1 ? "ren" : ""}`, // Khách
+  //             total: totalPrice,
+  //             whoReverse: dataform.whoReserve,
+  //             status: re,
+  //           };
+  //           // Giả sử bạn đang gửi dữ liệu này lên một API
+  //           const response = await axios.post(`${baseAPI}/detail/${user._id}`, bookingData);
+  //           console.log('Dữ liệu đã được cập nhật:', response.data);
+  //           navigate(`/hotels/${id}/reserve/complete`);
+
+  //         }catch(error) {
+  //             console.error('Lỗi khi cập nhật dữ liệu:', error);
+  //         }
+  //         // tạo dữ liệu để update lên database
+  //   } catch (error) {
+  //     console.error('Lỗi khi cập nhật dữ liệu:', error);
+  //     console.log(error.message)
+  //     console.log(error.stack)
+  //     // alert('Có lỗi khi cập nhật dữ liệu!');
+  //     // alert(user._id)
+  //   }
+  // };
   const handleClick = async (e) => {
     e.preventDefault();
-
+  
     const roomsData = selectedRoomsInfo.map((room) => ({
       title: room.title,
       roomNumber: room.roomNumber,
     }));
-
-    // const bookingData = {
-    //   fullname: dataform.fullname,
-    //   email: dataform.email,
-    //   phone: dataform.phone,
-    //   name: data.name,  // Lấy từ dữ liệu khách sạn
-    //   IDhotel: id,
-    //   address: data.address,
-    //   room: roomsData,  // Dữ liệu phòng
-    //   checkIn: dates[0].startDate.toISOString(), // Chuyển thành dạng ISO
-    //   checkOut: dates[0].endDate.toISOString(),
-    //   guests: `${numberOfAdults} adult${numberOfAdults > 1 ? "s" : ""}, ${numberOfChildren} child${numberOfChildren > 1 ? "ren" : ""}`, // Khách
-    //   total: totalPrice,
-    //   whoReverse: dataform.whoReserve,
-    //   status:
-    // };
-    const tongtien = totalPrice*1000;
-    const data1 = {
-      amount: tongtien, // Truyền tham số amount vào body
-    };
-    let URLMOMO="";
-    console.log('tong tien', tongtien);
-    let re ="";
+  
+    const tongtien = totalPrice * 1000;
+    const data1 = { amount: tongtien };
+  
     try {
-      //taoj link thanh toan momo
-      const urlmomo = await axios.post(`${baseAPI}/momo/payment`, data1)
-      .then(urlmomo => {
-        console.log("Payment response:", urlmomo.data); // Xử lý kết quả trả về từ API
-        const urlmo = urlmomo.data;
-        URLMOMO=urlmo;
-        console.log('du lieu da dc cap nhat', urlmo.payUrl);
-        if (urlmo.payUrl) {
-          window.location.href = urlmo.payUrl; 
-          console.log(urlmo.orderId);
-           // Điều hướng đến payUrl bên ngoài
-        } else {
-          console.error("payUrl không có trong phản hồi");
-        }
-      })
-      console.log( URLMOMO.orderId);
-      const data2 = {
-        orderId: URLMOMO.orderId, // Truyền tham số amount vào body
-      };
-      // tra ve tinh trang đã thanh toán hay chưa
-      const checkstatus = await axios.post(`${baseAPI}/momo/check-status`, data2)
-        .then(checkstatus => {
-          console.log("Payment response:", checkstatus.data); // Xử lý kết quả trả về từ API
-          const result = checkstatus.data;
-          //console.log('du lieu da dc cap nhat', urlmo.payUrl);
-          let re ="";
-          if (result.resultCode === 0 ) {
-            re = "đã thanh toán";
-          } else {
-            re = "chưa thanh toán";
-            console.error("payUrl không có trong phản hồi");
-          }})
-          try{
-            const bookingData = {
-              fullname: dataform.fullname,
-              email: dataform.email,
-              phone: dataform.phone,
-              name: data.name,  // Lấy từ dữ liệu khách sạn
-              IDhotel: id,
-              address: data.address,
-              room: roomsData,  // Dữ liệu phòng
-              checkIn: dates[0].startDate.toISOString(), // Chuyển thành dạng ISO
-              checkOut: dates[0].endDate.toISOString(),
-              guests: `${numberOfAdults} adult${numberOfAdults > 1 ? "s" : ""}, ${numberOfChildren} child${numberOfChildren > 1 ? "ren" : ""}`, // Khách
-              total: totalPrice,
-              whoReverse: dataform.whoReserve,
-              status: re,
-            };
-            // Giả sử bạn đang gửi dữ liệu này lên một API
-            const response = await axios.post(`${baseAPI}/detail/${user._id}`, bookingData);
-            console.log('Dữ liệu đã được cập nhật:', response.data);
-            navigate(`/hotels/${id}/reserve/complete`);
-
-          }catch(error) {
-              console.error('Lỗi khi cập nhật dữ liệu:', error);
-          }
-          // tạo dữ liệu để update lên database
+      const urlmomoResponse = await axios.post(`${baseAPI}/momo/payment`, data1);
+      console.log("Payment response:", urlmomoResponse.data);
+  
+      const URLMOMO = urlmomoResponse.data;
+      if (URLMOMO.payUrl) {
+        window.location.href = URLMOMO.payUrl;
+  
+        // Post-redirect logic to check payment status
+        const checkStatusResponse = await axios.post(`${baseAPI}/momo/check-status`, { orderId: URLMOMO.orderId });
+        const paymentStatus = checkStatusResponse.data.resultCode === 0 ? "đã thanh toán" : "chưa thanh toán";
+  
+        const bookingData = {
+          fullname: dataform.fullname,
+          email: dataform.email,
+          phone: dataform.phone,
+          name: data.name,
+          IDhotel: id,
+          address: data.address,
+          room: roomsData,
+          checkIn: dates[0].startDate.toISOString(),
+          checkOut: dates[0].endDate.toISOString(),
+          guests: `${numberOfAdults} adult${numberOfAdults > 1 ? "s" : ""}, ${numberOfChildren} child${numberOfChildren > 1 ? "ren" : ""}`,
+          total: totalPrice,
+          whoReserve: dataform.whoReserve,
+          status: paymentStatus,
+        };
+  
+        const bookingResponse = await axios.post(`${baseAPI}/detail/${user._id}`, bookingData);
+        console.log('Booking data updated:', bookingResponse.data);
+  
+        navigate(`/hotels/${id}/reserve/complete`);
+      } else {
+        console.error("Pay URL is missing in response");
+      }
     } catch (error) {
-      console.error('Lỗi khi cập nhật dữ liệu:', error);
-      console.log(error.message)
-      console.log(error.stack)
-      // alert('Có lỗi khi cập nhật dữ liệu!');
-      // alert(user._id)
+      console.error('An error occurred:', error.message);
+      alert('An error occurred while processing your request. Please try again.');
     }
   };
-
+  
   return (
     <div>
         <Navbar />
