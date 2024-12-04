@@ -75,19 +75,34 @@ import { useContext } from "react";
 const Roomtable = () => {
   const {user } = useContext(AuthContext);
   console.log(user);
-  
-  const { data, loading, error } = useFetch(`${baseAPI}/rooms/find/${user.hotelid}`);
+  const { data1, loading1, error1 } = useFetch(`${baseAPI}/hotels/find/${user.hotelid}`);
   const [rooms, setRooms] = useState([]);
+  const [loading2, setLoading2] = useState(true);
+  const [error2, setError2] = useState(null);
 
   useEffect(() => {
-    if (data) {
-      setRooms(data); // Set fetched data to the rooms state
-    }
-  }, [data]);
+    if (data1) {
+      const roomIds = data1.roomIds; // Giả sử bạn nhận được danh sách ID phòng từ data1
 
-  // Render loading state or error if needed
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+      // Gọi API cho từng phòng để lấy thông tin chi tiết
+      const fetchRooms = async () => {
+        try {
+          const roomPromises = roomIds.map((roomId) => 
+            fetch(`${baseAPI}/rooms/find/${roomId}`).then((res) => res.json())
+          );
+          
+          const roomsData = await Promise.all(roomPromises);
+          setRooms(roomsData); // Lưu thông tin các phòng vào state
+        } catch (error) {
+          setError2(error);
+        } finally {
+          setLoading2(false);
+        }
+      };
+
+      fetchRooms();
+    }
+  }, [data1]); // Chạy lại khi data1 thay đổi
 
   return (
     <div>
