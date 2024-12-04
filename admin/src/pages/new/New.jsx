@@ -4,6 +4,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 import axios from "axios";
+import { baseAPI } from "../../hooks/utils";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
@@ -31,7 +32,7 @@ const New = ({ inputs, title }) => {
         img: url,
       };
 
-      await axios.post("/auth/register", newUser);
+      await axios.post(`${baseAPI}/auth/register`, newUser);
     } catch (err) {
       console.log(err);
     }

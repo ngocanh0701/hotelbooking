@@ -2,6 +2,7 @@ import "./newUserHotel.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { useState } from "react";
 import axios from "axios";
+import { baseAPI } from "../../hooks/utils";
 
 const NewUserHotel = () => {
   const [info, setInfo] = useState({
@@ -23,7 +24,7 @@ const NewUserHotel = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/auth/registerhotel", info);
+      await axios.post(`${baseAPI}/auth/registerhotel`, info);
       alert("Registration successful!");
     } catch (err) {
       console.error(err);
