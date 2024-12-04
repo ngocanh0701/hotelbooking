@@ -31,8 +31,10 @@ const Roomtable = () => {
   const [error2, setError2] = useState(null);
 
   useEffect(() => {
-    const fetch = async() => {
+    const fetch = async() => {      
       const response = await axios.get(`${baseAPI}/hotels/find/${user.hotelid}`);
+      console.log(response);
+      
       const _roomdetails = [];
       
       for (let per_room of response.data.rooms) {
@@ -41,6 +43,8 @@ const Roomtable = () => {
         // console.log(roomfetched);
         _roomdetails.push(roomfetched);
       }
+      console.log(_roomdetails);
+      
       setRooms(_roomdetails);
     }
     const fetchRoomId = async(roomID) => {

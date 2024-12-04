@@ -26,7 +26,7 @@ const Login = () => {
     try {
       const res = await axios.post(`${baseAPI}/auth/loginhotel`, credentials);
       
-        navigate(`/thongtin/${user._id}`);
+        navigate(`/bangphong`);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       //navigate("/");  // Điều hướng đến trang dành cho người dùng
       
